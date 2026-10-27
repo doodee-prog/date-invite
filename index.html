@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Приглашение 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 40%, #fbc2eb 70%, #a18cd1 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+    padding: 20px;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .heart-bg {
+    position: fixed;
+    top: -12vh;
+    pointer-events: none;
+    animation: fall linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(115vh) rotate(360deg); }
+  }
+
+  .card {
+    position: relative;
+    background: rgba(255, 250, 252, 0.96);
+    backdrop-filter: blur(10px);
+    max-width: 480px;
+    width: 100%;
+    border-radius: 26px;
+    padding: 44px 32px 40px;
+    text-align: center;
+    box-shadow:
+      0 30px 70px rgba(200, 50, 100, 0.35),
+      0 10px 30px rgba(160, 90, 200, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transform: translateY(40px) scale(0.92);
+    animation: cardAppear 1.1s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    z-index: 5;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  @keyframes cardAppear {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .card::-webkit-scrollbar { width: 0; }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1.5px solid rgba(216, 27, 96, 0.25);
+    border-radius: 18px;
+    pointer-events: none;
+  }
+
+  .heart-icon {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 12px;
+    animation: beat 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(216, 27, 96, 0.4));
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    50% { transform: scale(0.95); }
+    75% { transform: scale(1.1); }
+  }
+
+  .greeting {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #b56b8d;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    line-height: 1.35;
+    color: #ad1457;
+    margin-bottom: 18px;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.3px;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #f06292, transparent);
+    margin: 0 auto 20px;
+  }
+
+  .message {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #6d4c5b;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .question {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #d81b60;
+    margin: 24px 0 6px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .buttons {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 28px;
+    min-height: 70px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
+
+  button {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 17px;
+    padding: 14px 34px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s, background 0.25s, opacity 0.3s;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .yes {
+    background: linear-gradient(135deg, #f06292, #d81b60);
+    color: white;
+    box-shadow: 0 10px 24px rgba(216, 27, 96, 0.45);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .yes:hover {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 14px 30px rgba(216, 27, 96, 0.6);
+  }
+  .yes:active { transform: scale(0.98); }
+
+  .no {
+    background: #f5e6ef;
+    color: #8e5a7a;
+    box-shadow: 0 4px 12px rgba(150, 90, 130, 0.15);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
+  }
+
+  .no-replaced {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #ad1457;
+    line-height: 1.4;
+    padding: 10px 16px;
+    display: none;
+    animation: fadeIn 0.5s;
+  }
+  .no-replaced.show { display: block; }
+
+  .screen {
+    display: none;
+    opacity: 0;
+  }
+  .screen.active {
+    display: block;
+    animation: fadeIn 0.9s 0.15s forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #fff5f8, #ffe9f1);
+    border: 1.5px solid #ffd1dc;
+    border-radius: 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: 'Lora', Georgia, serif;
+    color: #6d4c5b;
+    font-size: 16px;
+    line-height: 1.4;
+    width: 100%;
+  }
+  .option:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: #f06292;
+    box-shadow: 0 10px 24px rgba(216, 27, 96, 0.2);
+    background: linear-gradient(135deg, #fff0f5, #fce4ec);
+  }
+  .option:active { transform: scale(0.98); }
+
+  .option .emoji {
+    font-size: 34px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 3px 6px rgba(216, 27, 96, 0.25));
+  }
+  .option .opt-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .option .opt-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    color: #ad1457;
+    font-size: 18px;
+  }
+  .option .opt-sub {
+    font-size: 13.5px;
+    color: #a1748c;
+    font-style: italic;
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  .date-section {
+    margin-top: 20px;
+    text-align: left;
+  }
+  .date-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    color: #ad1457;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .month-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    font-style: italic;
+    color: #d81b60;
+    font-weight: 600;
+  }
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .cal-weekday {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 11px;
+    color: #b56b8d;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 4px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1.5px solid transparent;
+    background: #fff5f8;
+    color: #6d4c5b;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cal-day:hover:not(.disabled):not(.empty) {
+    background: #fce4ec;
+    border-color: #f06292;
+    transform: scale(1.08);
+  }
+  .cal-day.selected {
+    background: linear-gradient(135deg, #f06292, #d81b60);
+    color: #fff;
+    border-color: #d81b60;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.4);
+  }
+  .cal-day.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #f5f5f5;
+    color: #bbb;
+  }
+  .cal-day.empty {
+    background: transparent;
+    cursor: default;
+  }
+
+  .time-select {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1.5px solid #ffd1dc;
+    background: #fff5f8;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    color: #6d4c5b;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d81b60' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px;
+    padding-right: 44px;
+  }
+  .time-select:focus {
+    border-color: #f06292;
+    box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.2);
+  }
+
+  .nav-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    align-items: stretch;
+  }
+  .btn-back {
+    flex: 0 0 auto;
+    background: #f5e6ef;
+    color: #8e5a7a;
+    padding: 16px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(150, 90, 130, 0.15);
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  }
+  .btn-back:hover {
+    background: #eddbe7;
+    transform: translateY(-2px);
+  }
+
+  .btn-next {
+    flex: 1;
+    background: linear-gradient(135deg, #f06292, #d81b60);
+    color: #fff;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 17px;
+    padding: 16px 34px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 24px rgba(216, 27, 96, 0.45);
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
+  }
+  .btn-next:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(216, 27, 96, 0.6);
+  }
+  .btn-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .final h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    color: #d81b60;
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-style: italic;
+  }
+  .final p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    color: #6d4c5b;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .final .details {
+    background: linear-gradient(135deg, #fff0f5, #fce4ec);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px dashed #f06292;
+  }
+  .final .details strong {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #ad1457;
+    display: block;
+    font-size: 19px;
+    margin: 8px 0;
+    font-weight: 600;
+  }
+
+  .confirm-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #f06292, #d81b60);
+    color: #fff;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 18px;
+    padding: 16px 34px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 10px 24px rgba(216, 27, 96, 0.45);
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s, background 0.25s;
+    cursor: pointer;
+  }
+  .confirm-btn:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 14px 30px rgba(216, 27, 96, 0.6);
+  }
+  .confirm-btn:disabled {
+    cursor: wait;
+  }
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+
+<div class="card" id="card">
+
+  <!-- ЭКРАН 1: Приглашение -->
+  <div class="screen active" id="screen1">
+    <span class="heart-icon">💌</span>
+    <div class="greeting">Приглашение</div>
+    <h1>У меня к тебе особенный вопрос...</h1>
+    <div class="divider"></div>
+    <p class="message">С тех пор, как ты появилась в моей жизни, обычные дни стали казаться теплее.</p>
+    <p class="message">Я тут кое-что придумал, и мне очень хочется провести этот вечер с тобой.</p>
+    <p class="question">Ты со мной? 🌹</p>
+
+    <div class="buttons" id="buttonsBox">
+      <button class="yes" id="yesBtn">Да 💕</button>
+      <button class="no" id="noBtn">Нет</button>
+      <div class="no-replaced" id="noReplaced">Упс, такой вариант мне не подходит! Попробуй другой 😉</div>
+    </div>
+  </div>
+
+  <!-- ЭКРАН 2: Выбор места -->
+  <div class="screen" id="screen2">
+    <span class="heart-icon">🥰</span>
+    <div class="greeting">Ты согласилась!</div>
+    <h1>Тогда у меня есть ещё пара вопросов...</h1>
+    <div class="divider"></div>
+    <p class="message">Куда бы ты хотела пойти?</p>
+
+    <div class="options">
+      <button class="option" data-choice="park">
+        <span class="emoji">🕊️</span>
+        <span class="opt-text">
+          <span class="opt-title">Покормить птичек в парке</span>
+          <span class="opt-sub">неспешная прогулка и немного волшебства</span>
+        </span>
+      </button>
+
+      <button class="option" data-choice="cinema">
+        <span class="emoji">🎬</span>
+        <span class="opt-text">
+          <span class="opt-title">Сходить в кино</span>
+          <span class="opt-sub">большой экран и место рядом со мной</span>
+        </span>
+      </button>
+
+      <button class="option" data-choice="moscow">
+        <span class="emoji">🌃</span>
+        <span class="opt-text">
+          <span class="opt-title">Покататься по вечерней Москве</span>
+          <span class="opt-sub">огни, ветер и город, который принадлежит нам</span>
+        </span>
+      </button>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn-back" id="backToS1">⬅ Назад</button>
+    </div>
+  </div>
+
+  <!-- ЭКРАН 3: Дата и время -->
+  <div class="screen" id="screen3">
+    <span class="heart-icon">📅</span>
+    <div class="greeting">Ещё один вопрос</div>
+    <h1>Когда тебе удобно?</h1>
+    <div class="divider"></div>
+    <p class="message">Выбери день и время, которые тебе подходят</p>
+
+    <div class="date-section">
+      <span class="date-label">Дата</span>
+      <div class="month-header">Октябрь 2026</div>
+      <div class="calendar" id="calendar"></div>
+
+      <span class="date-label">Время</span>
+      <select class="time-select" id="timeSelect">
+        <option value="">— выбери время —</option>
+      </select>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-back" id="backToS2">⬅ Назад</button>
+      <button class="btn-next" id="btnNext" disabled>Дальше 💕</button>
+    </div>
+  </div>
+
+  <!-- ЭКРАН 4: Финал -->
+  <div class="screen final" id="screen4">
+    <span class="heart-icon">💖</span>
+    <h2>Отличный выбор!</h2>
+    <p>Я уже предвкушаю этот вечер.</p>
+    <div class="details" id="finalDetails"></div>
+    
+    <p style="font-size: 14px; color: #999; margin-top: 15px;">
+      Нажми на кнопку ниже, чтобы я узнал о твоём выборе 👇
+    </p>
+    <button id="confirmBtn" class="confirm-btn" type="button">
+      Со всем согласна) 👉👈
+    </button>
+  </div>
+
+</div>
+
+<script>
+  // ===== Фоновые сердечки =====
+  const heartsContainer = document.getElementById('hearts');
+  const symbols = ['💗', '💖', '💕', '🌸', '💘', '✨', '🌹'];
+  for (let i = 0; i < 22; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-bg';
+    h.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.animationDuration = (7 + Math.random() * 9) + 's';
+    h.style.animationDelay = (Math.random() * 10) + 's';
+    h.style.fontSize = (14 + Math.random() * 24) + 'px';
+    heartsContainer.appendChild(h);
+  }
+
+  // ===== Элементы =====
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const noReplaced = document.getElementById('noReplaced');
+  const screen1 = document.getElementById('screen1');
+  const screen2 = document.getElementById('screen2');
+  const screen3 = document.getElementById('screen3');
+  const screen4 = document.getElementById('screen4');
+  const finalDetails = document.getElementById('finalDetails');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const calendarEl = document.getElementById('calendar');
+  const timeSelect = document.getElementById('timeSelect');
+  const btnNext = document.getElementById('btnNext');
+  
+  const backToS1 = document.getElementById('backToS1');
+  const backToS2 = document.getElementById('backToS2');
+
+  function showScreen(from, to) {
+    from.classList.remove('active');
+    setTimeout(() => {
+      from.style.display = 'none';
+      to.style.display = 'block';
+      void to.offsetWidth;
+      to.classList.add('active');
+    }, 250);
+  }
+
+  // ===== Кнопка "Да" =====
+  yesBtn.addEventListener('click', () => {
+    burstHearts();
+    setTimeout(() => showScreen(screen1, screen2), 400);
+  });
+
+  // ===== Кнопка "Нет" =====
+  let noCount = 0;
+  const noTexts = ['Нет', 'Точно нет?'];
+
+  noBtn.addEventListener('click', () => {
+    noCount++;
+    if (noCount < 2) {
+      noBtn.style.transform = 'scale(0.8)';
+      noBtn.textContent = noTexts[noCount];
+      yesBtn.style.transform = 'scale(1.08)';
+    } else {
+      noBtn.style.transform = 'scale(0)';
+      noBtn.style.opacity = '0';
+      setTimeout(() => {
+        noBtn.style.display = 'none';
+        noReplaced.classList.add('show');
+        yesBtn.style.transform = 'scale(1.15)';
+      }, 350);
+    }
+  });
+
+  // ===== Данные о местах =====
+  const choices = {
+    park: {
+      emoji: '🕊️',
+      title: 'Парк с птичками',
+      formValue: '🕊️ Покормить птичек в парке',
+      lines: [
+        '📍 <strong>Парк — я знаю тихое место</strong>',
+        '🍞 <strong>Корм для птичек уже в сумке</strong>'
+      ]
+    },
+    cinema: {
+      emoji: '🎬',
+      title: 'Кино',
+      formValue: '🎬 Сходить в кино',
+      lines: [
+        '📍 <strong>Кинотеатр — выберем вместе</strong>',
+        '🎟️ <strong>Билеты и хорошее настроение — за мной</strong>'
+      ]
+    },
+    moscow: {
+      emoji: '🌃',
+      title: 'Вечерняя Москва',
+      formValue: '🌃 Покататься по вечерней Москве',
+      lines: [
+        '📍 <strong>Маршрут — сюрприз</strong>',
+        '✨ <strong>Огни города и хорошая музыка</strong>'
+      ]
+    }
+  };
+
+  let selectedChoice = null;
+  let selectedDate = null;
+  let selectedTime = null;
+
+  // ===== Календарь: октябрь 2026 =====
+  const OCTOBER_2026 = { year: 2026, month: 9 };
+  const TODAY = { year: 2026, month: 10, day: 27 };
+  const WEEKDAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+  function buildCalendar() {
+    calendarEl.innerHTML = '';
+    WEEKDAYS.forEach(w => {
+      const d = document.createElement('div');
+      d.className = 'cal-weekday';
+      d.textContent = w;
+      calendarEl.appendChild(d);
+    });
+
+    const { year, month } = OCTOBER_2026;
+    const first = new Date(year, month, 1);
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let startOffset = first.getDay() - 1;
+    if (startOffset < 0) startOffset = 6;
+
+    for (let i = 0; i < startOffset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-day empty';
+      calendarEl.appendChild(empty);
+    }
+
+    const todayDate = new Date(TODAY.year, TODAY.month - 1, TODAY.day);
+    todayDate.setHours(0, 0, 0, 0);
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+      cell.textContent = day;
+      cell.dataset.day = day;
+
+      const cellDate = new Date(year, month, day);
+      cellDate.setHours(0, 0, 0, 0);
+
+      if (cellDate < todayDate) {
+        cell.classList.add('disabled');
+        cell.title = 'Эта дата уже прошла';
+      } else {
+        cell.addEventListener('click', () => selectDay(cell, day));
+        if (selectedDate && selectedDate.getDate() === day) {
+          cell.classList.add('selected');
+        }
+      }
+      calendarEl.appendChild(cell);
+    }
+  }
+
+  function selectDay(cell, day) {
+    const cellDate = new Date(2026, 9, day);
+    cellDate.setHours(0, 0, 0, 0);
+    const todayDate = new Date(TODAY.year, TODAY.month - 1, TODAY.day);
+    todayDate.setHours(0, 0, 0, 0);
+    if (cellDate < todayDate) return;
+
+    document.querySelectorAll('.cal-day.selected').forEach(c => c.classList.remove('selected'));
+    cell.classList.add('selected');
+    selectedDate = new Date(2026, 9, day);
+    updateNextButton();
+  }
+
+  // ===== Время: шаг 30 минут =====
+  function buildTimeOptions() {
+    for (let h = 0; h < 24; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        const hh = String(h).padStart(2, '0');
+        const mm = String(m).padStart(2, '0');
+        const opt = document.createElement('option');
+        opt.value = `${hh}:${mm}`;
+        opt.textContent = `${hh}:${mm}`;
+        timeSelect.appendChild(opt);
+      }
+    }
+  }
+
+  timeSelect.addEventListener('change', () => {
+    selectedTime = timeSelect.value || null;
+    updateNextButton();
+  });
+
+  function updateNextButton() {
+    btnNext.disabled = !(selectedDate && selectedTime);
+  }
+
+  buildCalendar();
+  buildTimeOptions();
+
+  // ===== Выбор места → экран даты =====
+  document.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedChoice = choices[btn.dataset.choice];
+      burstHearts();
+      setTimeout(() => showScreen(screen2, screen3), 400);
+    });
+  });
+
+  // ===== Кнопки Назад =====
+  backToS2.addEventListener('click', () => {
+    showScreen(screen3, screen2);
+  });
+
+  backToS1.addEventListener('click', () => {
+    showScreen(screen2, screen1);
+  });
+
+  // ===== Дальше → финал =====
+  btnNext.addEventListener('click', () => {
+    if (!(selectedChoice && selectedDate && selectedTime)) return;
+
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const year = selectedDate.getFullYear();
+    const dateStr = `${day}.${month}.${year}`;
+
+    finalDetails.innerHTML = `
+      <div style="font-size:34px;margin-bottom:8px;">${selectedChoice.emoji}</div>
+      <strong style="font-size:19px;margin-bottom:12px;">${selectedChoice.title}</strong>
+      ${selectedChoice.lines.map(l => `<div style="font-size:15px;color:#6d4c5b;margin:6px 0;">${l}</div>`).join('')}
+      <div style="margin-top:12px;padding-top:12px;border-top:1px dashed #f06292;">
+        <strong>📅 ${dateStr}</strong>
+        <strong>🕐 ${selectedTime}</strong>
+      </div>
+    `;
+
+    burstHearts();
+    setTimeout(() => showScreen(screen3, screen4), 400);
+  });
+
+  // ===== ОТПРАВКА НА EMAIL (FormSubmit AJAX) =====
+  confirmBtn.addEventListener('click', async () => {
+    confirmBtn.textContent = 'Отправляю... 💌';
+    confirmBtn.disabled = true;
+
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const year = selectedDate.getFullYear();
+    const dateStr = `${day}.${month}.${year}`;
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/danilamakhotin@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          "Место": selectedChoice.formValue,
+          "Дата": dateStr,
+          "Время": selectedTime,
+          "_subject": "Она согласилась на свидание! 💌",
+          "_template": "table"
+        })
+      });
+
+      if (!response.ok) throw new Error('Ошибка сети');
+
+      // Успешная отправка
+      confirmBtn.textContent = 'Ура! Всё отправлено 💖';
+      confirmBtn.style.background = 'linear-gradient(135deg, #66bb6a, #43a047)';
+      confirmBtn.style.boxShadow = '0 10px 24px rgba(67, 160, 71, 0.4)';
+      
+    } catch (error) {
+      alert('Не удалось отправить. Возможно, нет интернета.');
+      confirmBtn.textContent = 'Со всем согласна) 👉👈';
+      confirmBtn.disabled = false;
+    }
+  });
+
+  // ===== Салют из сердечек =====
+  function burstHearts() {
+    const emojis = ['💖', '💕', '💗', '🌹', '✨', '💘'];
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        h.style.position = 'fixed';
+        h.style.left = '50%';
+        h.style.top = '50%';
+        h.style.fontSize = (16 + Math.random() * 26) + 'px';
+        h.style.pointerEvents = 'none';
+        h.style.zIndex = 100;
+        h.style.transition = 'transform 1.6s cubic-bezier(0.2, 0.8, 0.4, 1), opacity 1.6s';
+        document.body.appendChild(h);
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 150 + Math.random() * 350;
+
+        requestAnimationFrame(() => {
+          h.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) rotate(${Math.random() * 720}deg) scale(${0.5 + Math.random()})`;
+          h.style.opacity = '0';
+        });
+
+        setTimeout(() => h.remove(), 1700);
+      }, i * 25);
+    }
+  }
+</script>
+</body>
+</html>
