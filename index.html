@@ -2,17 +2,17 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Приглашение 💌</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   html, body {
     min-height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* Убираем прокрутку самого body, скролл будет внутри карточки */
     font-family: 'Lora', Georgia, serif;
   }
 
@@ -23,7 +23,7 @@
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 40%, #fbc2eb 70%, #a18cd1 100%);
     background-size: 200% 200%;
     animation: gradientShift 12s ease infinite;
-    padding: 20px;
+    padding: 15px;
   }
 
   @keyframes gradientShift {
@@ -50,7 +50,7 @@
     max-width: 480px;
     width: 100%;
     border-radius: 26px;
-    padding: 44px 32px 40px;
+    padding: 40px 24px 36px; /* Уменьшили боковые отступы для мобилок */
     text-align: center;
     box-shadow:
       0 30px 70px rgba(200, 50, 100, 0.35),
@@ -62,14 +62,16 @@
     animation: cardAppear 1.1s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     z-index: 5;
     max-height: 92vh;
-    overflow-y: auto;
+    overflow-y: auto; /* Включаем скролл внутри карточки, если не влезает */
   }
 
   @keyframes cardAppear {
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
+  /* Скрываем скроллбар, но оставляем возможность скроллить */
   .card::-webkit-scrollbar { width: 0; }
+  .card { -ms-overflow-style: none; scrollbar-width: none; }
 
   .card::before {
     content: '';
@@ -81,9 +83,9 @@
   }
 
   .heart-icon {
-    font-size: 50px;
+    font-size: 44px;
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     animation: beat 1.4s ease-in-out infinite;
     filter: drop-shadow(0 4px 12px rgba(216, 27, 96, 0.4));
   }
@@ -96,46 +98,46 @@
 
   .greeting {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 15px;
-    letter-spacing: 4px;
+    font-size: 14px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: #b56b8d;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   h1 {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 28px;
+    font-size: 26px;
     line-height: 1.35;
     color: #ad1457;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     font-weight: 600;
     font-style: italic;
     letter-spacing: 0.3px;
   }
 
   .divider {
-    width: 60px;
+    width: 50px;
     height: 2px;
     background: linear-gradient(90deg, transparent, #f06292, transparent);
-    margin: 0 auto 20px;
+    margin: 0 auto 16px;
   }
 
   .message {
     font-family: 'Lora', Georgia, serif;
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.7;
     color: #6d4c5b;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-style: italic;
   }
 
   .question {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     color: #d81b60;
-    margin: 24px 0 6px;
+    margin: 20px 0 6px;
     line-height: 1.5;
     font-style: italic;
   }
@@ -143,19 +145,19 @@
   .buttons {
     position: relative;
     display: flex;
-    gap: 16px;
+    gap: 12px;
     justify-content: center;
     align-items: center;
-    margin-top: 28px;
+    margin-top: 24px;
     min-height: 70px;
     flex-wrap: wrap;
-    padding: 0 10px;
+    padding: 0 5px;
   }
 
   button {
     font-family: 'Lora', Georgia, serif;
-    font-size: 17px;
-    padding: 14px 34px;
+    font-size: 16px;
+    padding: 14px 28px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -171,11 +173,10 @@
     font-weight: 600;
     letter-spacing: 1px;
   }
-  .yes:hover {
+  .yes:hover, .yes:active {
     transform: translateY(-3px) scale(1.06);
     box-shadow: 0 14px 30px rgba(216, 27, 96, 0.6);
   }
-  .yes:active { transform: scale(0.98); }
 
   .no {
     background: #f5e6ef;
@@ -186,7 +187,7 @@
 
   .no-replaced {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 18px;
+    font-size: 17px;
     font-style: italic;
     color: #ad1457;
     line-height: 1.4;
@@ -212,77 +213,75 @@
   .options {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-top: 24px;
+    gap: 12px;
+    margin-top: 20px;
   }
 
   .option {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 18px 20px;
+    gap: 14px;
+    padding: 15px 16px;
     background: linear-gradient(135deg, #fff5f8, #ffe9f1);
     border: 1.5px solid #ffd1dc;
-    border-radius: 18px;
+    border-radius: 16px;
     cursor: pointer;
     text-align: left;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     font-family: 'Lora', Georgia, serif;
     color: #6d4c5b;
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.3;
     width: 100%;
   }
-  .option:hover {
-    transform: translateY(-3px) scale(1.02);
+  .option:hover, .option:active {
+    transform: translateY(-2px) scale(1.01);
     border-color: #f06292;
-    box-shadow: 0 10px 24px rgba(216, 27, 96, 0.2);
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.2);
     background: linear-gradient(135deg, #fff0f5, #fce4ec);
   }
-  .option:active { transform: scale(0.98); }
 
   .option .emoji {
-    font-size: 34px;
+    font-size: 28px;
     flex-shrink: 0;
-    filter: drop-shadow(0 3px 6px rgba(216, 27, 96, 0.25));
   }
   .option .opt-text {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 2px;
   }
   .option .opt-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 600;
     color: #ad1457;
-    font-size: 18px;
+    font-size: 17px;
   }
   .option .opt-sub {
-    font-size: 13.5px;
+    font-size: 12.5px;
     color: #a1748c;
     font-style: italic;
     font-family: 'Lora', Georgia, serif;
   }
 
   .date-section {
-    margin-top: 20px;
+    margin-top: 16px;
     text-align: left;
   }
   .date-label {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 17px;
+    font-size: 16px;
     color: #ad1457;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     display: block;
   }
   .month-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 19px;
+    font-size: 18px;
     font-style: italic;
     color: #d81b60;
     font-weight: 600;
@@ -290,43 +289,42 @@
   .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    margin-bottom: 20px;
+    gap: 4px; /* Уменьшили зазор */
+    margin-bottom: 16px;
   }
   .cal-weekday {
     font-family: 'Lora', Georgia, serif;
-    font-size: 11px;
+    font-size: 10px;
     color: #b56b8d;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-bottom: 4px;
+    letter-spacing: 0.5px;
+    padding-bottom: 2px;
   }
   .cal-day {
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    border: 1.5px solid transparent;
+    border-radius: 8px;
+    border: 1px solid transparent;
     background: #fff5f8;
     color: #6d4c5b;
     font-family: 'Lora', Georgia, serif;
-    font-size: 14px;
+    font-size: 13px; /* Чуть меньше шрифт в календаре */
     cursor: pointer;
     transition: all 0.2s;
   }
   .cal-day:hover:not(.disabled):not(.empty) {
     background: #fce4ec;
     border-color: #f06292;
-    transform: scale(1.08);
   }
   .cal-day.selected {
     background: linear-gradient(135deg, #f06292, #d81b60);
     color: #fff;
     border-color: #d81b60;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.4);
+    box-shadow: 0 2px 8px rgba(216, 27, 96, 0.4);
   }
   .cal-day.disabled {
     opacity: 0.3;
@@ -341,12 +339,12 @@
 
   .time-select {
     width: 100%;
-    padding: 14px 18px;
-    border-radius: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
     border: 1.5px solid #ffd1dc;
     background: #fff5f8;
     font-family: 'Lora', Georgia, serif;
-    font-size: 16px;
+    font-size: 15px;
     color: #6d4c5b;
     cursor: pointer;
     outline: none;
@@ -355,30 +353,29 @@
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d81b60' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 14px center;
-    background-size: 18px;
-    padding-right: 44px;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
   }
   .time-select:focus {
     border-color: #f06292;
-    box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.2);
   }
 
   .nav-buttons {
     display: flex;
-    gap: 12px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 20px;
     align-items: stretch;
   }
   .btn-back {
     flex: 0 0 auto;
     background: #f5e6ef;
     color: #8e5a7a;
-    padding: 16px 24px;
+    padding: 14px 18px;
     border-radius: 50px;
     font-weight: 600;
     font-family: 'Lora', Georgia, serif;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(150, 90, 130, 0.15);
@@ -386,7 +383,6 @@
   }
   .btn-back:hover {
     background: #eddbe7;
-    transform: translateY(-2px);
   }
 
   .btn-next {
@@ -394,19 +390,18 @@
     background: linear-gradient(135deg, #f06292, #d81b60);
     color: #fff;
     font-family: 'Lora', Georgia, serif;
-    font-size: 17px;
-    padding: 16px 34px;
+    font-size: 16px;
+    padding: 14px 20px;
     border: none;
     border-radius: 50px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     box-shadow: 0 10px 24px rgba(216, 27, 96, 0.45);
     cursor: pointer;
     transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
   }
   .btn-next:hover:not(:disabled) {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 14px 30px rgba(216, 27, 96, 0.6);
+    transform: translateY(-2px);
   }
   .btn-next:disabled {
     opacity: 0.4;
@@ -416,32 +411,32 @@
 
   .final h2 {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 28px;
+    font-size: 26px;
     color: #d81b60;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     font-weight: 600;
     font-style: italic;
   }
   .final p {
     font-family: 'Lora', Georgia, serif;
-    font-size: 16px;
+    font-size: 15px;
     color: #6d4c5b;
-    line-height: 1.8;
-    margin-bottom: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
   }
   .final .details {
     background: linear-gradient(135deg, #fff0f5, #fce4ec);
     border-radius: 16px;
-    padding: 20px;
-    margin: 20px 0;
+    padding: 16px;
+    margin: 16px 0;
     border: 1px dashed #f06292;
   }
   .final .details strong {
     font-family: 'Cormorant Garamond', Georgia, serif;
     color: #ad1457;
     display: block;
-    font-size: 19px;
-    margin: 8px 0;
+    font-size: 18px;
+    margin: 6px 0;
     font-weight: 600;
   }
 
@@ -451,23 +446,33 @@
     background: linear-gradient(135deg, #f06292, #d81b60);
     color: #fff;
     font-family: 'Lora', Georgia, serif;
-    font-size: 18px;
-    padding: 16px 34px;
+    font-size: 16px;
+    padding: 15px 28px;
     border: none;
     border-radius: 50px;
     text-decoration: none;
     box-shadow: 0 10px 24px rgba(216, 27, 96, 0.45);
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s, background 0.25s;
     cursor: pointer;
+    width: 100%; /* На мобильных кнопка на всю ширину */
   }
   .confirm-btn:hover:not(:disabled) {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 14px 30px rgba(216, 27, 96, 0.6);
+    transform: translateY(-3px);
   }
   .confirm-btn:disabled {
     cursor: wait;
+  }
+
+  /* Дополнительная адаптация для очень узких экранов (до 360px) */
+  @media (max-width: 360px) {
+    .card { padding: 30px 16px 26px; }
+    h1 { font-size: 22px; }
+    .heart-icon { font-size: 36px; }
+    .cal-day { font-size: 11px; border-radius: 6px; }
+    .btn-back { padding: 12px 14px; font-size: 13px; }
+    .btn-next { padding: 12px 16px; font-size: 15px; }
   }
 </style>
 </head>
@@ -565,7 +570,7 @@
     <p>Я уже предвкушаю этот вечер.</p>
     <div class="details" id="finalDetails"></div>
     
-    <p style="font-size: 14px; color: #999; margin-top: 15px;">
+    <p style="font-size: 13px; color: #999; margin-top: 12px;">
       Нажми на кнопку ниже, чтобы я узнал о твоём выборе 👇
     </p>
     <button id="confirmBtn" class="confirm-btn" type="button">
@@ -797,10 +802,10 @@
     const dateStr = `${day}.${month}.${year}`;
 
     finalDetails.innerHTML = `
-      <div style="font-size:34px;margin-bottom:8px;">${selectedChoice.emoji}</div>
-      <strong style="font-size:19px;margin-bottom:12px;">${selectedChoice.title}</strong>
-      ${selectedChoice.lines.map(l => `<div style="font-size:15px;color:#6d4c5b;margin:6px 0;">${l}</div>`).join('')}
-      <div style="margin-top:12px;padding-top:12px;border-top:1px dashed #f06292;">
+      <div style="font-size:30px;margin-bottom:6px;">${selectedChoice.emoji}</div>
+      <strong style="font-size:18px;margin-bottom:10px;">${selectedChoice.title}</strong>
+      ${selectedChoice.lines.map(l => `<div style="font-size:14px;color:#6d4c5b;margin:4px 0;">${l}</div>`).join('')}
+      <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #f06292;">
         <strong>📅 ${dateStr}</strong>
         <strong>🕐 ${selectedTime}</strong>
       </div>
@@ -821,7 +826,7 @@
     const dateStr = `${day}.${month}.${year}`;
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/danilamakhotin@gmail.com', {
+      const response = await fetch('https://formsubmit.co/ajax/denihrek@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
